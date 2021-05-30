@@ -2,7 +2,7 @@
   <breeze-authenticated-layout>
     <template #header>
       <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-        Ubah Produk
+        Ubah Mahasiswa
       </h2>
     </template>
     <div class="py-12">
@@ -12,22 +12,27 @@
             <form @submit.prevent="update">
               <iput type="hidden" v-model="form.id" />
               <div class="p-8 -mr-6 -mb-8 flex flex-wrap">
-                <div>
-                  <div>Nama</div>
-                  <input type="text" v-model="form.name" />
-                  <div>{{ errors.name }}</div>
+                <div class="form-group">
+                  <div>NIS</div>
+                  <input type="text" v-model="form.nis" />
+                  <div>{{ errors.nis }}</div>
                 </div>
-                <div style="width: 100%">
-                  <div>Deskripsi</div>
-                  <textarea v-model="form.description" />
+                <div class="form-group">
+                  <div>Nama Lengkap</div>
+                  <input type="text" v-model="form.fullname" />
+                  <div>{{ errors.fullname }}</div>
+                </div>
+                <div class="form-group">
+                  <div>Jurusan</div>
+                  <input type="text" v-model="form.major" />
+                  <div>{{ errors.major }}</div>
+                </div>
+                <div class="form-group">
+                  <div>Alamat</div>
+                  <textarea v-model="form.address" />
                   <div>
-                    {{ errors.description }}
+                    {{ errors.address }}
                   </div>
-                </div>
-                <div>
-                  <div>Harga</div>
-                  <input type="text" v-model="form.price" />
-                  <div v-if="errors.price">{{ errors.price }}</div>
                 </div>
               </div>
               <div
@@ -72,29 +77,32 @@ export default {
   },
   remember: "form",
   props: {
-    product: Object,
+    mahasiswa: Object,
     errors: Object,
   },
   methods: {
     update() {
-      Inertia.put(`/products/${this.form.id}`, {
-        name: this.form.name,
-        description: this.form.description,
-        price: parseInt(this.form.price, 10),
+      Inertia.put(`/mahasiswa/${this.form.id}`, {
+        nis: parseInt(this.form.nis, 10),
+        fullname: this.form.fullname,
+        major: this.form.major,
+        address: this.form.address,
       });
     },
     destroy() {
-      if (confirm("Are you sure you want to delete this product?")) {
-        Inertia.delete(`/products/${this.form.id}`);
+      if (confirm("Are you sure you want to delete this mahasiswa?")) {
+        Inertia.delete(`/mahasiswa/${this.form.id}`);
       }
     },
   },
   setup(props) {
     const form = useForm({
-      id: props.product.id,
-      name: props.product.name,
-      description: props.product.description,
-      price: props.product.price,
+      id: props.mahasiswa.id,
+      nis: props.mahasiswa.nis,
+      fullname: props.mahasiswa.fullname,
+      major: props.mahasiswa.major,
+      address: props.mahasiswa.address,
+      errors: props.errors,
     });
 
     return { form };

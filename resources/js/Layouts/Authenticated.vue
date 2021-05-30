@@ -19,7 +19,10 @@
                                     Dashboard
                                 </breeze-nav-link>
                                 <breeze-nav-link :href="route('products')" :active="route().current('products')">
-                                    Products
+                                    Produk
+                                </breeze-nav-link>
+                                <breeze-nav-link :href="route('mahasiswa')" :active="route().current('mahasiswa')">
+                                    Mahasiswa
                                 </breeze-nav-link>
                             </div>
                         </div>

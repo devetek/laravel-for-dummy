@@ -4,6 +4,7 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\MahasiswaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,6 +30,8 @@ Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+// Products
+
 Route::get('products', [ProductController::class, 'index'])
     ->name('products')
     ->middleware('auth');
@@ -51,6 +54,31 @@ Route::put('products/{product}', [ProductController::class, 'update'])
 
 Route::delete('products/{product}', [ProductController::class, 'destroy'])
     ->name('products.destroy')
+    ->middleware('auth');
+
+// Mahasiswa
+Route::get('mahasiswa', [MahasiswaController::class, 'index'])
+    ->name('mahasiswa')
+    ->middleware('auth');
+
+Route::get('mahasiswa/create', [MahasiswaController::class, 'create'])
+    ->name('mahasiswa.create')
+    ->middleware('auth');
+
+Route::post('mahasiswa', [MahasiswaController::class, 'store'])
+    ->name('mahasiswa.store')
+    ->middleware('auth');
+
+Route::get('mahasiswa/{mahasiswa}/edit', [MahasiswaController::class, 'edit'])
+    ->name('mahasiswa.edit')
+    ->middleware('auth');
+
+Route::put('mahasiswa/{mahasiswa}', [MahasiswaController::class, 'update'])
+    ->name('mahasiswa.update')
+    ->middleware('auth');
+
+Route::delete('mahasiswa/{mahasiswa}', [MahasiswaController::class, 'destroy'])
+    ->name('mahasiswa.destroy')
     ->middleware('auth');
 
 require __DIR__ . '/auth.php';

@@ -2,7 +2,7 @@
   <breeze-authenticated-layout>
     <template #header>
       <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-        Tambah Produk
+        Tambah Mahasiswa
       </h2>
     </template>
     <div class="py-12">
@@ -12,25 +12,30 @@
             <form @submit.prevent="submit">
               <div class="p-8 -mr-6 -mb-8 flex flex-wrap">
                 <div class="form-group">
-                  <div>Nama</div>
-                  <input type="text" v-model="form.name" />
-                  <div v-if="form.errors.name">{{ form.errors.name }}</div>
+                  <div>NIS</div>
+                  <input type="text" v-model="form.nis" />
+                  <div v-if="errors.nis">{{ errors.nis }}</div>
                 </div>
                 <div class="form-group">
-                  <div>Deskripsi</div>
-                  <textarea v-model="form.description" />
-                  <div v-if="form.errors.description">
-                    {{ form.errors.description }}
+                  <div>Nama Lengkap</div>
+                  <input type="text" v-model="form.fullname" />
+                  <div v-if="errors.fullname">{{ errors.fullname }}</div>
+                </div>
+                <div class="form-group">
+                  <div>Jurusan</div>
+                  <input type="text" v-model="form.major" />
+                  <div v-if="errors.major">{{ errors.major }}</div>
+                </div>
+                <div class="form-group">
+                  <div>Alamat</div>
+                  <textarea v-model="form.address" />
+                  <div v-if="errors.address">
+                    {{ errors.address }}
                   </div>
-                </div>
-                <div class="form-group">
-                  <div>Harga</div>
-                  <input type="text" v-model="form.price" />
-                  <div v-if="form.errors.price">{{ form.errors.price }}</div>
                 </div>
               </div>
               <div
-                class="px-8 py-4 bg-gray-50 border-t border-gray-100 flex justify-end items-center"
+                class="form-group px-8 py-4 bg-gray-50 border-t border-gray-100 flex justify-end items-center"
               >
                 <loading-button
                   :loading="form.processing"
@@ -47,6 +52,9 @@
   </breeze-authenticated-layout>
 </template>
 
+<style scoped>
+</style>
+
 <script>
 import { Inertia } from "@inertiajs/inertia";
 import { useForm } from "@inertiajs/inertia-vue3";
@@ -61,18 +69,23 @@ export default {
     TextInput,
   },
   remember: "form",
-  setup() {
+  props: {
+    errors: Object,
+  },
+  setup(props) {
     const form = useForm({
-      name: null,
-      description: null,
-      price: null,
+      nis: null,
+      fullname: null,
+      major: null,
+      address: null,
     });
 
     function submit() {
-      Inertia.post("/products", {
-        name: form.name,
-        description: form.description,
-        price: parseInt(form.price, 10),
+      Inertia.post("/mahasiswa", {
+        nis: parseInt(form.nis, 10),
+        fullname: form.fullname,
+        major: form.major,
+        address: form.address,
       });
     }
 
