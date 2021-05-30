@@ -81,4 +81,8 @@ Route::delete('mahasiswa/{mahasiswa}', [MahasiswaController::class, 'destroy'])
     ->name('mahasiswa.destroy')
     ->middleware('auth');
 
+Route::get('mahasiswa/export/pdf', [MahasiswaController::class, 'createPDF'])
+    ->name('mahasiswa.createPDF')
+    ->middleware('auth');
+
 require __DIR__ . '/auth.php';

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use PDF;
 use Inertia\Inertia;
 use App\Models\Mahasiswa;
 use Illuminate\Http\Request;
@@ -118,5 +119,27 @@ class MahasiswaController extends Controller
         $mahasiswa->delete();
 
         return Redirect::route('mahasiswa')->with('success', 'Mahasiswa deleted.');
+    }
+
+    /**
+     * Export all data mahasiswa to PDF
+     * 
+     * @return \Barryvdh\DomPDF\PDF
+     */
+    public function createPDF()
+    {
+        // retreive all records from db
+        $data = Mahasiswa::all();
+
+        $data = [
+            'title' => "Pengaturan Mahasiswa",
+            'mahasiswa' => $data,
+        ];
+
+        // share data to view
+        $pdf = PDF::loadView('mahasiswa/pdf', $data);
+
+        // download PDF file with download method
+        return $pdf->download('pdf_mahasiswa.pdf');
     }
 }

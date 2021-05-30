@@ -12,7 +12,10 @@
             <div class="float-right mb-6 flex justify-between items-center">
               <inertia-link class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent" :href="route('mahasiswa.create')">
                 <span>Tambah Mahasiswa</span>
-              </inertia-link>
+              </inertia-link>&nbsp;
+              <a class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent" href="/mahasiswa/export/pdf">
+              Download PDF
+              </a>
             </div>
             <table class="w-full whitespace-nowrap">
               <tr class="text-left font-bold">
@@ -86,11 +89,6 @@
               <tr v-if="mahasiswas.length === 0">
                 <td class="border-t px-6 py-4" colspan="4">
                   Tidak ada mahasiswa ditemukan.
-                </td>
-              </tr>
-              <tr>
-                <td class="border-t px-6 py-4" colspan="4">
-                  Download PDF
                 </td>
               </tr>
             </table>
