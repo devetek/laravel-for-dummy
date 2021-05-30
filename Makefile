@@ -1,3 +1,13 @@
+# Setup env to make sure this repository running well in your local environment without Docker
+.PHONY: setup
+setup:
+	@echo "Check available binary PHP, NodeJS"
+	@echo "Check OS version to pick installation binary version"
+	@echo "Check environment version: PHP, NodeJS. If match, continue to TRUE step"
+	@echo "TRUE: Install service dependencies"
+	@echo "FALSE: Rework environment dependencies"
+	@echo "Running service"
+
 # Update git hook setup
 .PHONY: update-commit-rules
 update-commit-rules:
