@@ -63,10 +63,10 @@
                 "stop-on-failure": ["pre-push"]
             },
             "pre-commit": [
-                "vendor/bin/php-cs-fixer fix app",
-                "php-commitizen commit"
+                "which cz && exit 0",
+                "vendor/bin/php-cs-fixer fix app"
             ],
-            "commit-msg": "grep -q '[A-Z]+-[0-9]+.*' $1",
+            "prepare-commit-msg": "exec < /dev/tty && git cz --hook || true",
             "pre-push": [
                 "php-cs-fixer fix --dry-run .",
                 "phpunit"
