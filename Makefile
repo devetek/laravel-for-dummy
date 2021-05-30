@@ -6,17 +6,15 @@ setup:
 	@echo "Check environment version: PHP, NodeJS. If match, continue to TRUE step"
 	@echo "TRUE: Install service dependencies"
 	@echo "FALSE: Rework environment dependencies"
+	@composer update
+	@npm install
 	@echo "Running service"
 
-# Update git hook setup
-.PHONY: update-commit-rules
-update-commit-rules:
-	@php vendor/bin/cghooks update
-
-# Migration basic commands, write all here then no need remember all the commands
-.PHONY: create-migration
-create-migration:
-	@php artisan make:migration $(MIGRATION_NAME)
+# Model/Migration basic commands, write all here then no need remember all the commands
+.PHONY: create-model
+create-model:
+	@php artisan make:model $(MODEL_NAME) --migration
+	@php artisan make:controller $(MODEL_NAME)Controller --resource --model=$(MODEL_NAME)
 
 .PHONY: exec-migration
 exec-migration:
@@ -26,9 +24,7 @@ exec-migration:
 check-migration:
 	@php artisan migrate:status
 
-
-# Model Name Rules
-# Must use UpperCase at first char, e.g: Product, Mahasiswa
-.PHONY: create-model
-create-model:
-	@php artisan make:model $(MODEL_NAME) --migration
+# Update git hook setup
+.PHONY: update-commit-rules
+update-commit-rules:
+	@php vendor/bin/cghooks update
