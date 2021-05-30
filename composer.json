@@ -69,7 +69,7 @@
             "prepare-commit-msg": "exec < /dev/tty && git cz --hook || true",
             "pre-push": [
                 "vendor/bin/php-cs-fixer fix --dry-run .",
-                "vendor/bin/phpunit"
+                "php artisan test"
             ],
             "post-merge": "composer install"
         }
