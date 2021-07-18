@@ -2,7 +2,7 @@
     <breeze-authenticated-layout>
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                Tambah Mahasiswa
+                Tambah Video
             </h2>
         </template>
         <div class="py-12">
@@ -12,40 +12,43 @@
                         <form @submit.prevent="submit">
                             <div class="p-8 -mr-6 -mb-8 flex flex-wrap">
                                 <div class="form-group">
-                                    <div>NIS</div>
-                                    <input type="text" v-model="form.nis" />
-                                    <div v-if="errors.nis">
-                                        {{ errors.nis }}
+                                    <div>Subject</div>
+                                    <input type="text" v-model="form.subject" />
+                                    <div v-if="form.errors.subject">
+                                        {{ form.errors.subject }}
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <div>Nama Lengkap</div>
-                                    <input
-                                        type="text"
-                                        v-model="form.fullname"
-                                    />
-                                    <div v-if="errors.fullname">
-                                        {{ errors.fullname }}
+                                    <div>Link</div>
+                                    <input type="text" v-model="form.link" />
+                                    <div v-if="form.errors.link">
+                                        {{ form.errors.link }}
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <div>Jurusan</div>
-                                    <input type="text" v-model="form.major" />
-                                    <div v-if="errors.major">
-                                        {{ errors.major }}
+                                    <div>Content</div>
+                                    <textarea v-model="form.content" />
+                                    <div v-if="form.errors.content">
+                                        {{ form.errors.content }}
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <div>Alamat</div>
-                                    <textarea v-model="form.address" />
-                                    <div v-if="errors.address">
-                                        {{ errors.address }}
+                                    <div>Publish</div>
+                                    <select v-model="form.publish">
+                                        <option disabled value="">
+                                            Please select one
+                                        </option>
+                                        <option value="2">Publish</option>
+                                        <option value="1">Draft</option>
+                                        <option value="0">Delete</option>
+                                    </select>
+                                    <div v-if="form.errors.publish">
+                                        {{ form.errors.publish }}
                                     </div>
                                 </div>
                             </div>
                             <div
                                 class="
-                                    form-group
                                     px-8
                                     py-4
                                     bg-gray-50
@@ -70,8 +73,6 @@
     </breeze-authenticated-layout>
 </template>
 
-<style scoped></style>
-
 <script>
 import { Inertia } from "@inertiajs/inertia";
 import { useForm } from "@inertiajs/inertia-vue3";
@@ -86,23 +87,20 @@ export default {
         TextInput,
     },
     remember: "form",
-    props: {
-        errors: Object,
-    },
-    setup(props) {
+    setup() {
         const form = useForm({
-            nis: null,
-            fullname: null,
-            major: null,
-            address: null,
+            subject: null,
+            link: null,
+            content: null,
+            publish: null,
         });
 
         function submit() {
-            Inertia.post("/mahasiswa", {
-                nis: parseInt(form.nis, 10),
-                fullname: form.fullname,
-                major: form.major,
-                address: form.address,
+            Inertia.post("/video", {
+                subject: form.subject || '',
+                link: form.link || '',
+                content: form.content || '',
+                publish: parseInt(form.publish, 10),
             });
         }
 

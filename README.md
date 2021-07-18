@@ -18,4 +18,4 @@ Atau untuk mempermudah pengecekan jalankan perintah `make setup` untuk memastika
 
 Dasar pengetahuan yang harus dimiliki untuk dapat menjalankan, pastikan bisa basic laravel, e.g: artisan CLI, migration, auth, VueJS. Atau untuk mempersempit lingkup, beberapa command yang dapat digunakan  untuk membuat Model, Controller, Migration dapat dilihat di [Makefile](Makefile). Detail bisa langsung cek dokumentasi laravel selengkapnya https://laravel.com/docs/8.x.
 
-Untuk database sekarang tidak perlu repot-repot  install database sendiri, jika hanya digunakan untuk tugas kuliah dengan data minimalis. Ada banyak provider database RDBMS kaya MySQL, Postgresql gratis di dinia yang namanya Internet. Sebagai contoh https://remotemysql.com/
+Untuk database sekarang tidak perlu repot-repot  install database sendiri, jika hanya digunakan untuk tugas kuliah dengan data minimalis. Ada banyak provider database RDBMS kaya MySQL, Postgresql gratis di dinia yang namanya Internet. Sebagai contoh https://remotemysql.com/, https://www.freemysqlhosting.net/

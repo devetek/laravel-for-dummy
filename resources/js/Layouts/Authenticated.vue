@@ -18,11 +18,26 @@
                                 <breeze-nav-link :href="route('dashboard')" :active="route().current('dashboard')">
                                     Dashboard
                                 </breeze-nav-link>
-                                <breeze-nav-link :href="route('products')" :active="route().current('products')">
+                                <!--<breeze-nav-link :href="route('products')" :active="route().current('products')">
                                     Produk
                                 </breeze-nav-link>
                                 <breeze-nav-link :href="route('mahasiswa')" :active="route().current('mahasiswa')">
                                     Mahasiswa
+                                </breeze-nav-link>-->
+                                <breeze-nav-link :href="route('video')" :active="route().current('video')">
+                                    Video
+                                </breeze-nav-link>
+                                <breeze-nav-link :href="route('user')" :active="route().current('user')">
+                                    User
+                                </breeze-nav-link>
+                                <breeze-nav-link :href="route('menu')" :active="route().current('menu')">
+                                    Menu
+                                </breeze-nav-link>
+                                <breeze-nav-link :href="route('profile')" :active="route().current('profile')">
+                                    Profile
+                                </breeze-nav-link>
+                                <breeze-nav-link :href="route('access')" :active="route().current('access')">
+                                    Access
                                 </breeze-nav-link>
                             </div>
                         </div>

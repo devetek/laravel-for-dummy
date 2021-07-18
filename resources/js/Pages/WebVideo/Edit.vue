@@ -2,7 +2,7 @@
     <breeze-authenticated-layout>
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                Ubah Produk
+                Ubah Video
             </h2>
         </template>
         <div class="py-12">
@@ -10,25 +10,41 @@
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                     <div class="p-6 bg-white border-b border-gray-200">
                         <form @submit.prevent="update">
-                            <iput type="hidden" v-model="form.id" />
+                            <iput type="hidden" v-model="form.kd_video" />
                             <div class="p-8 -mr-6 -mb-8 flex flex-wrap">
-                                <div>
-                                    <div>Nama</div>
-                                    <input type="text" v-model="form.name" />
-                                    <div>{{ errors.name }}</div>
-                                </div>
-                                <div style="width: 100%">
-                                    <div>Deskripsi</div>
-                                    <textarea v-model="form.description" />
-                                    <div>
-                                        {{ errors.description }}
+                                <div class="form-group">
+                                    <div>Subject</div>
+                                    <input type="text" v-model="form.subject" />
+                                    <div v-if="errors.subject">
+                                        {{ errors.subject }}
                                     </div>
                                 </div>
-                                <div>
-                                    <div>Harga</div>
-                                    <input type="text" v-model="form.price" />
-                                    <div v-if="errors.price">
-                                        {{ errors.price }}
+                                <div class="form-group">
+                                    <div>Link</div>
+                                    <input type="text" v-model="form.link" />
+                                    <div v-if="errors.link">
+                                        {{ errors.link }}
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div>Content</div>
+                                    <textarea v-model="form.content" />
+                                    <div v-if="errors.content">
+                                        {{ errors.content }}
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div>Publish</div>
+                                    <select v-model="form.publish">
+                                        <option disabled value="">
+                                            Please select one
+                                        </option>
+                                        <option value="2">Publish</option>
+                                        <option value="1">Draft</option>
+                                        <option value="0">Delete</option>
+                                    </select>
+                                    <div v-if="errors.publish">
+                                        {{ errors.publish }}
                                     </div>
                                 </div>
                             </div>
@@ -51,7 +67,7 @@
                                 >
                                 &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
                                 <button
-                                    v-if="form.id"
+                                    v-if="form.kd_video"
                                     class="text-red-600 hover:underline"
                                     tabindex="-1"
                                     type="button"
@@ -83,29 +99,31 @@ export default {
     },
     remember: "form",
     props: {
-        product: Object,
+        video: Object,
         errors: Object,
     },
     methods: {
         update() {
-            Inertia.put(`/products/${this.form.id}`, {
-                name: this.form.name,
-                description: this.form.description,
-                price: parseInt(this.form.price, 10),
+            Inertia.put(`/video/${this.form.kd_video}`, {
+                subject: this.form.subject,
+                link: this.form.link,
+                content: this.form.content,
+                publish: parseInt(this.form.publish, 10),
             });
         },
         destroy() {
-            if (confirm("Are you sure you want to delete this product?")) {
-                Inertia.delete(`/products/${this.form.id}`);
+            if (confirm("Are you sure you want to delete this video?")) {
+                Inertia.delete(`/video/${this.form.kd_video}`);
             }
         },
     },
     setup(props) {
         const form = useForm({
-            id: props.product.id,
-            name: props.product.name,
-            description: props.product.description,
-            price: props.product.price,
+            kd_video: props.video.kd_video,
+            subject: props.video.subject,
+            link: props.video.link,
+            content: props.video.content,
+            publish: parseInt(props.video.publish, 10),
         });
 
         return { form };
